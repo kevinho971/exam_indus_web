@@ -2,14 +2,13 @@ language: php
 php:
   - '7.1'
 
-before_script:
-  - docker run -d -p 6379:6379 --name myAwesomeRedis redis:latest
-  - composer install
+#before_script:
+ # - composer install
 
 script:
-  - phpunit
   - docker run --rm -v $PWD:/app phpqa/security-checker security:check
   - docker run --rm -v $PWD:/app phpqa/phpcs .
+  - phpunit
 
 notifications:
   email:
